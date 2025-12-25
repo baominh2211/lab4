@@ -1,14 +1,22 @@
+import { useTheme } from './context/ThemeContext';
 import MouseTracker from './components/MouseTracker';
 import UncontrolledLogin from './components/UncontrolledLogin';
 import PostFetcher from './components/PostFetcher';
 import ControlledSignup from './components/ControlledSignup';
 import ThemeDemo from './components/ThemeDemo';
 import LocalStorageDemo from './components/LocalStorageDemo';
+import ThemeSwitcher from './components/ThemeSwitcher';
+import ChristmasEffects from './components/ChristmasEffects';
 import './App.css';
 
 export default function App() {
+  const { currentTheme } = useTheme();
+
   return (
     <div className="app">
+      <ThemeSwitcher />
+      {currentTheme === 'christmas' && <ChristmasEffects />}
+      
       <h1>Lab 4: Intermediate React</h1>
       
       <section>
@@ -42,7 +50,9 @@ export default function App() {
       </section>
 
       <section style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: currentTheme === 'christmas' 
+          ? 'linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%)'
+          : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         color: 'white'
       }}>
         <h2 style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>
@@ -58,7 +68,7 @@ export default function App() {
             display: 'inline-block',
             padding: '0.875rem 1.75rem',
             background: 'white',
-            color: '#667eea',
+            color: currentTheme === 'christmas' ? '#dc2626' : '#667eea',
             borderRadius: '8px',
             textDecoration: 'none',
             fontWeight: '600',
