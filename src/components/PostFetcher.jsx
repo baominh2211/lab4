@@ -27,13 +27,63 @@ export default function PostFetcher() {
     fetchPost();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return (
+    <div>
+      <h3>3.2 PostFetcher</h3>
+      <div style={{ 
+        padding: '2rem', 
+        textAlign: 'center',
+        color: '#6366f1',
+        fontSize: '1.125rem'
+      }}>
+        ⏳ Loading post...
+      </div>
+    </div>
+  );
+
+  if (error) return (
+    <div>
+      <h3>3.2 PostFetcher</h3>
+      <div style={{
+        background: '#fef2f2',
+        border: '2px solid #ef4444',
+        color: '#ef4444',
+        padding: '1rem',
+        borderRadius: '8px',
+        fontWeight: '500'
+      }}>
+        ❌ Error: {error.message}
+      </div>
+    </div>
+  );
+
   if (data) return (
     <div>
       <h3>3.2 PostFetcher</h3>
-      <h1>{data.title}</h1>
-      <p>{data.body}</p>
+      <div style={{
+        background: 'linear-gradient(to bottom right, #f0f9ff, #dbeafe)',
+        padding: '1.5rem',
+        borderRadius: '12px',
+        border: '1px solid #bfdbfe'
+      }}>
+        <h4 style={{ 
+          fontSize: '1.25rem', 
+          marginBottom: '0.75rem',
+          color: '#1e40af'
+        }}>
+          {data.title}
+        </h4>
+        <p style={{ color: '#374151', lineHeight: '1.7' }}>
+          {data.body}
+        </p>
+        <div style={{
+          marginTop: '1rem',
+          fontSize: '0.875rem',
+          color: '#6b7280'
+        }}>
+          Post ID: {data.id} • User ID: {data.userId}
+        </div>
+      </div>
     </div>
   );
 }

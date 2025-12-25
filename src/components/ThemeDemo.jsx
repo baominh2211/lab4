@@ -3,13 +3,30 @@ import ThemeContext from '../context/ThemeContext';
 
 function ThemedButton() {
   const theme = useContext(ThemeContext);
-  return <button className={`button-${theme}`}>I'm a {theme} button</button>;
+  return (
+    <button 
+      className={`button-${theme}`}
+      style={{
+        minWidth: '200px',
+        transition: 'all 0.3s ease'
+      }}
+    >
+      {theme === 'light' ? '☀️' : '🌙'} {theme.charAt(0).toUpperCase() + theme.slice(1)} Mode
+    </button>
+  );
 }
 
 function Toolbar() {
   return (
-    <div>
-      <h4>Toolbar</h4>
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(0,0,0,0.02)',
+      borderRadius: '8px',
+      marginTop: '1rem'
+    }}>
+      <h4 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '500' }}>
+        Toolbar Component
+      </h4>
       <ThemedButton />
     </div>
   );
@@ -17,8 +34,15 @@ function Toolbar() {
 
 function Dashboard() {
   return (
-    <div>
-      <h4>Dashboard</h4>
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(0,0,0,0.02)',
+      borderRadius: '8px',
+      marginTop: '1rem'
+    }}>
+      <h4 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '500' }}>
+        Dashboard Component
+      </h4>
       <Toolbar />
     </div>
   );
@@ -30,10 +54,16 @@ export default function ThemeDemo() {
   return (
     <ThemeContext.Provider value={theme}>
       <div>
-        <h3>6.2 ThemeDemo</h3>
-        <p>Current theme: {theme}</p>
-        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-          Toggle Theme
+        <h3>6.2 ThemeDemo - Context API</h3>
+        <p>
+          Theme propagates through nested components without prop drilling.
+          Current theme: <strong>{theme}</strong>
+        </p>
+        <button 
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          style={{ marginTop: '1rem' }}
+        >
+          {theme === 'light' ? '🌙' : '☀️'} Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
         </button>
         <Dashboard />
       </div>
